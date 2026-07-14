@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>JRADY TOYS · Tienda de Juguetes Bolivia</title>
+    <title>JRADY TOYS · Tienda en Tiempo Real</title>
+
+    <!-- ===== FIREBASE SDK ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+    <!-- ===== FONT AWESOME + GOOGLE FONTS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
     <style>
-        /* ===== RESET ===== */
+        /* ============================================================
+               ESTILOS COMPLETOS - JRADY TOYS
+               ============================================================ */
+
+        /* ----- RESET ----- */
         * {
             margin: 0;
             padding: 0;
@@ -27,7 +39,7 @@
             padding: 0 20px;
         }
 
-        /* ===== HEADER ===== */
+        /* ----- HEADER ----- */
         .main-header {
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             padding: 16px 0;
@@ -56,7 +68,6 @@
             font-weight: 900;
             letter-spacing: 1px;
         }
-
         .brand-green {
             color: #4ade80;
         }
@@ -85,8 +96,8 @@
             border-radius: 8px;
             transition: all 0.3s;
             font-size: 0.9em;
+            cursor: pointer;
         }
-
         .nav-menu a:hover {
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
@@ -97,12 +108,17 @@
             color: #fff !important;
             cursor: pointer;
         }
-
         .admin-login-btn:hover {
             background: #c73652 !important;
         }
+        .admin-login-btn.logged {
+            background: #2e7d32;
+        }
+        .admin-login-btn.logged:hover {
+            background: #1b5e20 !important;
+        }
 
-        /* ===== CATEGORÍAS ===== */
+        /* ----- CATEGORÍAS ----- */
         .category-bar {
             background: #fff;
             padding: 12px 0;
@@ -130,18 +146,16 @@
             border: 1px solid transparent;
             cursor: pointer;
         }
-
         .category-list a:hover {
             background: #f1f5f9;
             color: #0f3460;
         }
-
         .category-list a.active {
             background: #0f3460;
             color: #fff;
         }
 
-        /* ===== TÍTULO Y BUSCADOR ===== */
+        /* ----- TÍTULO Y BUSCADOR ----- */
         .section-title-row {
             display: flex;
             justify-content: space-between;
@@ -181,7 +195,7 @@
             color: #475569;
         }
 
-        /* ===== BUSCADOR ===== */
+        /* ----- BUSCADOR ----- */
         .search-box {
             display: flex;
             align-items: center;
@@ -193,12 +207,10 @@
             border: 2px solid #e2e8f0;
             transition: all 0.3s ease;
         }
-
         .search-box:focus-within {
             border-color: #0f3460;
             box-shadow: 0 2px 12px rgba(15, 52, 96, 0.15);
         }
-
         .search-box input {
             border: none;
             padding: 10px 18px;
@@ -209,11 +221,9 @@
             background: transparent;
             color: #1a1a2e;
         }
-
         .search-box input::placeholder {
             color: #94a3b8;
         }
-
         .search-box button {
             background: #0f3460;
             color: #fff;
@@ -223,12 +233,11 @@
             transition: background 0.3s;
             font-size: 0.9em;
         }
-
         .search-box button:hover {
             background: #1a4a7a;
         }
 
-        /* ===== MAIN GRID ===== */
+        /* ----- MAIN GRID ----- */
         .main-grid {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -242,7 +251,7 @@
             }
         }
 
-        /* ===== FILTROS ===== */
+        /* ----- FILTROS ----- */
         .filters-panel {
             background: #fff;
             border-radius: 16px;
@@ -265,7 +274,6 @@
         .filter-group {
             margin-bottom: 18px;
         }
-
         .filter-group h4 {
             font-size: 0.8em;
             color: #64748b;
@@ -277,11 +285,9 @@
         .filter-list {
             list-style: none;
         }
-
         .filter-list li {
             margin-bottom: 4px;
         }
-
         .filter-list label {
             display: flex;
             align-items: center;
@@ -293,11 +299,9 @@
             border-radius: 6px;
             transition: background 0.2s;
         }
-
         .filter-list label:hover {
             background: #f1f5f9;
         }
-
         .filter-list input[type="checkbox"] {
             accent-color: #0f3460;
             width: 16px;
@@ -308,12 +312,10 @@
         .price-range {
             padding: 4px 0;
         }
-
         .price-range input[type="range"] {
             width: 100%;
             accent-color: #0f3460;
         }
-
         .price-labels {
             display: flex;
             justify-content: space-between;
@@ -333,18 +335,16 @@
             transition: all 0.3s;
             font-size: 0.85em;
         }
-
         .clear-filters-btn:hover {
             background: #e2e8f0;
         }
 
-        /* ===== ADMIN ===== */
+        /* ----- ADMIN ----- */
         .admin-section {
             margin-top: 20px;
             padding-top: 16px;
             border-top: 2px solid #e2e8f0;
         }
-
         .admin-section.hidden {
             display: none;
         }
@@ -355,7 +355,6 @@
             align-items: center;
             margin-bottom: 12px;
         }
-
         .admin-header h4 {
             color: #0f3460;
             font-size: 0.95em;
@@ -371,7 +370,6 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-
         .logout-btn:hover {
             background: #c73652;
         }
@@ -393,7 +391,6 @@
             font-family: inherit;
             transition: border-color 0.3s;
         }
-
         #productForm input:focus,
         #productForm select:focus {
             outline: none;
@@ -407,7 +404,6 @@
             margin-bottom: 10px;
             flex-wrap: wrap;
         }
-
         .file-input-hidden {
             display: none;
         }
@@ -422,7 +418,6 @@
             color: #334155;
             border: 1px dashed #94a3b8;
         }
-
         .file-input-label:hover {
             background: #e2e8f0;
         }
@@ -444,7 +439,6 @@
             transition: background 0.3s;
             font-size: 0.95em;
         }
-
         .btn-submit:hover {
             background: #1a4a7a;
         }
@@ -454,8 +448,11 @@
             margin-top: 8px;
             color: #2e7d32;
         }
+        .admin-msg.error {
+            color: #dc2626;
+        }
 
-        /* ===== PRODUCTOS ===== */
+        /* ----- PRODUCTOS ----- */
         .product-toolbar {
             display: flex;
             justify-content: space-between;
@@ -478,7 +475,6 @@
             font-size: 0.85em;
             color: #475569;
         }
-
         .sort-control select {
             padding: 6px 12px;
             border-radius: 8px;
@@ -503,23 +499,19 @@
             transition: all 0.3s ease;
             border: 1px solid #f1f5f9;
         }
-
         .product-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
-
         .product-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             background: #f8fafc;
         }
-
         .product-card .product-body {
             padding: 16px;
         }
-
         .product-card .product-name {
             font-weight: 700;
             font-size: 1em;
@@ -529,26 +521,22 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
         .product-card .product-category {
             font-size: 0.75em;
             color: #94a3b8;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
         .product-card .product-price {
             font-size: 1.3em;
             font-weight: 800;
             color: #0f3460;
             margin: 6px 0 10px;
         }
-
         .product-card .product-actions {
             display: flex;
             gap: 8px;
         }
-
         .product-card .btn-buy {
             flex: 1;
             padding: 10px;
@@ -561,11 +549,9 @@
             transition: background 0.3s;
             font-size: 0.85em;
         }
-
         .product-card .btn-buy:hover {
             background: #1a4a7a;
         }
-
         .product-card .btn-delete {
             padding: 10px 14px;
             background: #fee2e2;
@@ -575,7 +561,6 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-
         .product-card .btn-delete:hover {
             background: #fecaca;
         }
@@ -588,7 +573,7 @@
             font-size: 1.1em;
         }
 
-        /* ===== PAGINACIÓN ===== */
+        /* ----- PAGINACIÓN ----- */
         .pagination {
             display: flex;
             justify-content: center;
@@ -596,7 +581,6 @@
             gap: 16px;
             padding: 10px 0;
         }
-
         .page-btn {
             padding: 8px 20px;
             border: 1px solid #e2e8f0;
@@ -607,23 +591,20 @@
             transition: all 0.3s;
             font-size: 0.85em;
         }
-
         .page-btn:hover {
             background: #f1f5f9;
             border-color: #0f3460;
         }
-
         .page-btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
-
         #pageInfo {
             font-size: 0.9em;
             color: #64748b;
         }
 
-        /* ===== MODALES ===== */
+        /* ----- MODALES ----- */
         .modal {
             display: none;
             position: fixed;
@@ -638,20 +619,8 @@
             align-items: center;
             padding: 20px;
         }
-
         .modal.active {
             display: flex;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
         }
 
         .modal-content {
@@ -663,7 +632,6 @@
             overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
-
         .modal-lg {
             max-width: 900px;
         }
@@ -680,12 +648,10 @@
             z-index: 10;
             border-radius: 20px 20px 0 0;
         }
-
         .modal-header h2 {
             font-size: 1.3em;
             color: #1a1a2e;
         }
-
         .modal-close {
             background: none;
             border: none;
@@ -695,7 +661,6 @@
             transition: color 0.3s;
             padding: 0 8px;
         }
-
         .modal-close:hover {
             color: #e94560;
         }
@@ -704,11 +669,10 @@
             padding: 24px;
         }
 
-        /* ===== MODAL COMPRA ===== */
+        /* ----- MODAL COMPRA ----- */
         .purchase-product-info {
             margin-bottom: 20px;
         }
-
         .purchase-product-card {
             display: flex;
             align-items: center;
@@ -718,25 +682,21 @@
             border-radius: 12px;
             border: 1px solid #f1f5f9;
         }
-
         .purchase-product-img {
             width: 80px;
             height: 80px;
             object-fit: cover;
             border-radius: 10px;
         }
-
         .purchase-product-details h4 {
             font-size: 1.1em;
             color: #1a1a2e;
             margin: 0;
         }
-
         .purchase-product-category {
             color: #94a3b8;
             font-size: 0.8em;
         }
-
         .purchase-product-price {
             font-size: 1.5em;
             font-weight: 800;
@@ -744,11 +704,10 @@
             margin: 4px 0 0;
         }
 
-        /* ===== DATOS DE PAGO ===== */
+        /* ----- DATOS DE PAGO ----- */
         .payment-data-section {
             margin-bottom: 20px;
         }
-
         .payment-data-section h3 {
             font-size: 1.1em;
             color: #1a1a2e;
@@ -761,7 +720,6 @@
             padding: 16px 20px;
             border: 2px solid #e2e8f0;
         }
-
         .payment-data-item {
             display: flex;
             align-items: center;
@@ -771,17 +729,14 @@
             color: #1a1a2e;
             border-bottom: 1px solid #f1f5f9;
         }
-
         .payment-data-item:last-child {
             border-bottom: none;
         }
-
         .payment-data-item i {
             width: 24px;
             color: #0f3460;
             font-size: 1.1em;
         }
-
         .payment-data-item.highlight {
             background: #e8f0fe;
             padding: 8px 12px;
@@ -808,16 +763,14 @@
             transition: background 0.3s;
             margin-left: auto;
         }
-
         .btn-copy-small:hover {
             background: #1a4a7a;
         }
 
-        /* ===== MÉTODOS DE PAGO ===== */
+        /* ----- MÉTODOS DE PAGO ----- */
         .payment-methods-section {
             margin-top: 20px;
         }
-
         .payment-methods-section h3 {
             font-size: 1.1em;
             color: #1a1a2e;
@@ -829,7 +782,6 @@
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-
         @media (max-width: 768px) {
             .payment-methods-grid {
                 grid-template-columns: 1fr;
@@ -843,25 +795,20 @@
             border: 2px solid #e2e8f0;
             transition: all 0.3s ease;
         }
-
         .payment-method-card:hover {
             border-color: #0f3460;
             box-shadow: 0 4px 15px rgba(15, 52, 96, 0.08);
         }
-
         .payment-method-card.whatsapp-method {
             border-color: #25D366;
         }
-
         .payment-method-card.whatsapp-method:hover {
             border-color: #128C7E;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.15);
         }
-
         .payment-method-card.transfer-method {
             border-color: #0f3460;
         }
-
         .payment-method-card.transfer-method:hover {
             border-color: #1a4a7a;
             box-shadow: 0 4px 15px rgba(15, 52, 96, 0.12);
@@ -873,14 +820,12 @@
             display: block;
             margin-bottom: 6px;
         }
-
         .payment-method-card h4 {
             text-align: center;
             color: #1a1a2e;
             font-size: 1.05em;
             margin-bottom: 2px;
         }
-
         .payment-method-card>p {
             text-align: center;
             color: #64748b;
@@ -888,11 +833,10 @@
             margin-bottom: 12px;
         }
 
-        /* ===== SUBIR COMPROBANTE ===== */
+        /* ----- SUBIR COMPROBANTE ----- */
         .comprobante-upload {
             margin: 12px 0;
         }
-
         .upload-area {
             border: 2px dashed #cbd5e1;
             border-radius: 12px;
@@ -903,32 +847,27 @@
             background: #f8fafc;
             position: relative;
         }
-
         .upload-area:hover {
             border-color: #0f3460;
             background: #f1f5f9;
         }
-
         .upload-area i {
             font-size: 3em;
             color: #94a3b8;
             display: block;
             margin-bottom: 8px;
         }
-
         .upload-area p {
             color: #475569;
             font-size: 0.95em;
             margin: 0;
         }
-
         .upload-area .upload-formats {
             font-size: 0.75em;
             color: #94a3b8;
             display: block;
             margin-top: 4px;
         }
-
         .upload-area input[type="file"] {
             position: absolute;
             top: 0;
@@ -948,11 +887,9 @@
             border-radius: 8px;
             margin-top: 10px;
         }
-
         .file-preview.hidden {
             display: none;
         }
-
         .file-preview img {
             width: 60px;
             height: 60px;
@@ -960,7 +897,6 @@
             border-radius: 8px;
             border: 1px solid #e2e8f0;
         }
-
         .file-preview .file-name-display {
             flex: 1;
             font-size: 0.85em;
@@ -981,12 +917,11 @@
             align-items: center;
             justify-content: center;
         }
-
         .btn-remove-file:hover {
             background: #fecaca;
         }
 
-        /* ===== BOTONES ===== */
+        /* ----- BOTONES ----- */
         .btn-whatsapp-pay,
         .btn-whatsapp-comprobante,
         .btn-confirm-payment {
@@ -1005,7 +940,6 @@
             gap: 8px;
             font-family: inherit;
         }
-
         .btn-whatsapp-pay {
             background: #25D366;
             color: #fff;
@@ -1013,7 +947,6 @@
         .btn-whatsapp-pay:hover {
             background: #128C7E;
         }
-
         .btn-whatsapp-comprobante {
             background: #25D366;
             color: #fff;
@@ -1021,7 +954,6 @@
         .btn-whatsapp-comprobante:hover {
             background: #128C7E;
         }
-
         .btn-confirm-payment {
             background: #2e7d32;
             color: #fff;
@@ -1047,11 +979,10 @@
             border-top: 2px solid #f1f5f9;
         }
 
-        /* ===== MODAL LOGIN ===== */
+        /* ----- MODAL LOGIN ----- */
         #loginModal .modal-content {
             max-width: 420px;
         }
-
         #loginModal .modal-body p {
             color: #64748b;
             margin-bottom: 16px;
@@ -1060,7 +991,6 @@
         .form-group {
             margin-bottom: 14px;
         }
-
         .form-group label {
             display: block;
             font-size: 0.85em;
@@ -1068,7 +998,6 @@
             color: #334155;
             margin-bottom: 4px;
         }
-
         .form-group input {
             width: 100%;
             padding: 10px 12px;
@@ -1078,7 +1007,6 @@
             font-family: inherit;
             transition: border-color 0.3s;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: #0f3460;
@@ -1096,7 +1024,6 @@
             transition: background 0.3s;
             font-size: 1em;
         }
-
         .login-btn:hover {
             background: #1a4a7a;
         }
@@ -1107,12 +1034,11 @@
             margin-top: 10px;
             text-align: center;
         }
-
         .login-error.hidden {
             display: none;
         }
 
-        /* ===== FOOTER ===== */
+        /* ----- FOOTER ----- */
         .main-footer {
             background: #1a1a2e;
             color: #94a3b8;
@@ -1133,7 +1059,6 @@
             text-decoration: none;
             font-weight: 600;
         }
-
         .footer-contact a:hover {
             color: #128C7E;
         }
@@ -1144,14 +1069,13 @@
             font-size: 0.85em;
             flex-wrap: wrap;
         }
-
         .footer-info span {
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        /* ===== TOAST ===== */
+        /* ----- TOAST ----- */
         .toast-notification {
             position: fixed;
             bottom: 30px;
@@ -1168,7 +1092,6 @@
             font-size: 0.95em;
             animation: slideUp 0.3s ease-out;
         }
-
         .toast-success {
             background: #2e7d32;
         }
@@ -1190,7 +1113,7 @@
             }
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ----- RESPONSIVE ----- */
         @media (max-width: 768px) {
             .brand {
                 font-size: 1.5em;
@@ -1265,22 +1188,33 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
     <header class="main-header">
         <div class="container header-grid">
             <div class="logo-area">
-                <h1 class="brand"><span class="brand-green">JRADY</span> <span class="brand-yellow">TOYS</span></h1>
+                <h1 class="brand">
+                    <span class="brand-green">JRADY</span>
+                    <span class="brand-yellow">TOYS</span>
+                </h1>
                 <span class="slogan">✨ Tienda de Juguetes</span>
             </div>
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="#" id="btnAdminLogin" class="admin-login-btn"><i class="fas fa-user-shield"></i> Admin</a></li>
+                    <li>
+                        <a href="#" id="btnAdminLogin" class="admin-login-btn">
+                            <i class="fas fa-user-shield"></i> Admin
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- ===== CATEGORÍAS ===== -->
+    <!-- ============================================================
+    CATEGORÍAS
+    ============================================================ -->
     <section class="category-bar">
         <div class="container">
             <ul class="category-list">
@@ -1295,7 +1229,9 @@
         </div>
     </section>
 
-    <!-- ===== TÍTULO Y BUSCADOR ===== -->
+    <!-- ============================================================
+    TÍTULO Y BUSCADOR
+    ============================================================ -->
     <div class="container section-title-row">
         <div class="title-location">
             <h2 class="section-title">🎪 Nuestra Tienda</h2>
@@ -1308,7 +1244,9 @@
         <div class="weather-tag"><i class="fas fa-cloud-sun"></i> 5°C Despejado</div>
     </div>
 
-    <!-- ===== MAIN ===== -->
+    <!-- ============================================================
+    MAIN
+    ============================================================ -->
     <main class="container main-grid">
 
         <!-- FILTROS -->
@@ -1341,14 +1279,18 @@
                 </div>
 
                 <div class="filter-group">
-                    <button id="clearFiltersBtn" class="clear-filters-btn"><i class="fas fa-undo"></i> Limpiar filtros</button>
+                    <button id="clearFiltersBtn" class="clear-filters-btn">
+                        <i class="fas fa-undo"></i> Limpiar filtros
+                    </button>
                 </div>
 
                 <!-- ADMIN PANEL -->
                 <div id="adminSection" class="admin-section hidden">
                     <div class="admin-header">
                         <h4><i class="fas fa-user-cog"></i> Panel Admin</h4>
-                        <button id="adminLogoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar</button>
+                        <button id="adminLogoutBtn" class="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar
+                        </button>
                     </div>
                     <div id="adminPanel">
                         <h5><i class="fas fa-plus-circle"></i> Agregar producto</h5>
@@ -1366,12 +1308,17 @@
                             </select>
                             <div class="file-input-wrapper">
                                 <label for="prodImageInput" class="file-input-label">
-                                    <i class="fas fa-upload"></i> Seleccionar imagen
+                                    <i class="fas fa-upload"></i> Seleccionar imagen (opcional)
                                 </label>
                                 <input type="file" id="prodImageInput" accept=".jpg,.jpeg,.png,.gif,.webp" class="file-input-hidden" />
                                 <span id="fileNameDisplay" class="file-name">Ningún archivo seleccionado</span>
                             </div>
-                            <button type="submit" class="btn-submit"><i class="fas fa-plus"></i> Agregar producto</button>
+                            <p style="font-size:0.75em; color:#94a3b8; margin-bottom:10px;">
+                                ⚠️ Imagen máxima 1MB. Si no seleccionas, se usará una imagen automática.
+                            </p>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-plus"></i> Agregar producto
+                            </button>
                         </form>
                         <p class="admin-msg" id="adminMsg"></p>
                     </div>
@@ -1383,7 +1330,7 @@
         <section class="product-section">
             <div class="product-toolbar">
                 <div class="product-info">
-                    <span class="product-count" id="productCount">0 productos</span>
+                    <span class="product-count" id="productCount">Cargando productos...</span>
                 </div>
                 <div class="sort-control">
                     <span>Ordenar</span>
@@ -1398,14 +1345,20 @@
             <div id="productGrid" class="product-grid"></div>
 
             <div class="pagination" id="pagination">
-                <button id="prevPageBtn" class="page-btn"><i class="fas fa-chevron-left"></i> Anterior</button>
+                <button id="prevPageBtn" class="page-btn">
+                    <i class="fas fa-chevron-left"></i> Anterior
+                </button>
                 <span id="pageInfo">Página 1 de 1</span>
-                <button id="nextPageBtn" class="page-btn">Siguiente <i class="fas fa-chevron-right"></i></button>
+                <button id="nextPageBtn" class="page-btn">
+                    Siguiente <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </section>
     </main>
 
-    <!-- ===== MODAL COMPRA ===== -->
+    <!-- ============================================================
+    MODAL COMPRA
+    ============================================================ -->
     <div id="purchaseModal" class="modal">
         <div class="modal-content modal-lg">
             <div class="modal-header">
@@ -1430,7 +1383,9 @@
                         <div class="payment-data-item highlight">
                             <i class="fas fa-credit-card"></i>
                             <span><strong>Cuenta:</strong> <span class="account-number">201-51999874-3-05</span></span>
-                            <button id="copyAccountBtn2" class="btn-copy-small"><i class="fas fa-copy"></i> Copiar</button>
+                            <button id="copyAccountBtn2" class="btn-copy-small">
+                                <i class="fas fa-copy"></i> Copiar
+                            </button>
                         </div>
                         <div class="payment-data-item">
                             <i class="fas fa-money-bill-wave"></i>
@@ -1452,6 +1407,7 @@
 
                     <div class="payment-methods-grid">
 
+                        <!-- MÉTODO WHATSAPP -->
                         <div class="payment-method-card whatsapp-method">
                             <div class="method-icon">📱</div>
                             <h4>Pago por WhatsApp</h4>
@@ -1462,6 +1418,7 @@
                             <p class="method-note">📲 Se abrirá WhatsApp con los datos de pago</p>
                         </div>
 
+                        <!-- MÉTODO SUBIR COMPROBANTE -->
                         <div class="payment-method-card transfer-method">
                             <div class="method-icon">📤</div>
                             <h4>Subir comprobante</h4>
@@ -1477,7 +1434,9 @@
                                 <div id="filePreview" class="file-preview hidden">
                                     <img id="previewImage" src="" alt="Comprobante" />
                                     <span id="fileNameDisplay2" class="file-name-display"></span>
-                                    <button id="removeFileBtn" class="btn-remove-file"><i class="fas fa-times"></i></button>
+                                    <button id="removeFileBtn" class="btn-remove-file">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </div>
                             </div>
 
@@ -1499,7 +1458,9 @@
         </div>
     </div>
 
-    <!-- ===== MODAL LOGIN ===== -->
+    <!-- ============================================================
+    MODAL LOGIN
+    ============================================================ -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1511,108 +1472,264 @@
                 <form id="loginForm">
                     <div class="form-group">
                         <label><i class="fas fa-user"></i> Usuario</label>
-                        <input type="text" id="loginUser" placeholder="DORIS" value="DORIS" required />
+                        <input type="text" id="loginUser" placeholder="admin@jradytoys.com" value="admin@jradytoys.com" required />
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-lock"></i> Contraseña</label>
                         <input type="password" id="loginPassword" placeholder="DORIS123" value="DORIS123" required />
                     </div>
-                    <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                    </button>
                     <p id="loginError" class="login-error hidden">❌ Usuario o contraseña incorrectos</p>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
     <footer class="main-footer">
         <div class="container footer-grid">
             <div class="footer-contact">
-                <p><i class="fab fa-whatsapp"></i> <strong>Compras:</strong> <a href="https://wa.me/59171270717" target="_blank">+591 71270717</a></p>
+                <p>
+                    <i class="fab fa-whatsapp"></i>
+                    <strong>Compras:</strong>
+                    <a href="https://wa.me/59171270717" target="_blank">+591 71270717</a>
+                </p>
             </div>
             <div class="footer-info">
                 <span><i class="fas fa-store"></i> Tienda Online</span>
                 <span><i class="fas fa-tag"></i> 49%</span>
                 <span><i class="far fa-clock"></i> 22:06</span>
-                <span><i class="far fa-calendar-alt"></i> 8/7/2026</span>
+                <span><i class="far fa-calendar-alt"></i> 13/7/2026</span>
             </div>
         </div>
     </footer>
 
+    <!-- ============================================================
+    CONFIGURACIÓN FIREBASE - ACTUALIZADO CON TUS DATOS
+    ============================================================ -->
     <script>
-        // ===== CONFIGURACIÓN =====
-        const CONFIG = {
-            whatsappNumber: '71270717',
-            countryCode: '591',
-            bank: 'BCP',
-            account: '201-51999874-3-05',
-            accountClean: '20151999874305',
-            beneficiary: 'Doris Isabel Arteaga Velasquez',
-            concept: 'Juguetes',
-            expiry: '09/07/2027',
-            adminUser: 'DORIS',
-            adminPassword: 'DORIS123'
+        // ═══════════════════════════════════════════════════════════════
+        // 🔥 CONFIGURACIÓN DE FIREBASE - TUS CREDENCIALES
+        // ═══════════════════════════════════════════════════════════════
+        const firebaseConfig = {
+            apiKey: "AIzaSyAL6FviSfR7TayYhi-bMj1kp0BdfOB4Tu4",
+            authDomain: "juguetes-5e3a6.firebaseapp.com",
+            projectId: "juguetes-5e3a6",
+            storageBucket: "juguetes-5e3a6.firebasestorage.app",
+            messagingSenderId: "355154542629",
+            appId: "1:355154542629:web:874a7d009039c931823fcc",
+            measurementId: "G-YNG1QRED8S"
         };
 
-        // ===== PRODUCTOS =====
-        let products = [
-            { id: 1, name: 'Monopoly Clásico', price: 120, category: 'Juegos de mesa', image: 'https://picsum.photos/seed/monopoly/400/400' },
-            { id: 2, name: 'Muñeca Barbie Dreamhouse', price: 350, category: 'Niña', image: 'https://picsum.photos/seed/barbie/400/400' },
-            { id: 3, name: 'Lego City 60200', price: 280, category: 'Lego', image: 'https://picsum.photos/seed/lego/400/400' },
-            { id: 4, name: 'Pelota de Fútbol', price: 65, category: 'Juegos de exterior', image: 'https://picsum.photos/seed/ball/400/400' },
-            { id: 5, name: 'Sonajero Bebé', price: 25, category: 'Bebé', image: 'https://picsum.photos/seed/rattle/400/400' },
-            { id: 6, name: 'Coche RC 4x4', price: 180, category: 'Niño', image: 'https://picsum.photos/seed/rc/400/400' },
-            { id: 7, name: 'Uno Card Game', price: 45, category: 'Juegos de mesa', image: 'https://picsum.photos/seed/uno/400/400' },
-            { id: 8, name: 'Casa de Muñecas', price: 420, category: 'Niña', image: 'https://picsum.photos/seed/dollhouse/400/400' },
-            { id: 9, name: 'Lego Technic', price: 550, category: 'Lego', image: 'https://picsum.photos/seed/technic/400/400' },
-            { id: 10, name: 'Trompo Metálico', price: 35, category: 'Niño', image: 'https://picsum.photos/seed/trompo/400/400' },
-        ];
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
 
-        let filteredProducts = [...products];
+        console.log('🔥 Firebase conectado correctamente');
+        console.log('📁 Proyecto:', firebaseConfig.projectId);
+    </script>
+
+    <!-- ============================================================
+    LÓGICA DE LA TIENDA - VERSIÓN CORREGIDA
+    ============================================================ -->
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // VARIABLES GLOBALES
+        // ═══════════════════════════════════════════════════════════════
+
+        let products = [];
+        let filteredProducts = [];
         let currentPage = 1;
         const itemsPerPage = 6;
         let isAdmin = false;
         let currentPurchaseProduct = null;
         let currentPurchaseAmount = 0;
-        let productIdCounter = 11;
         let comprobanteFile = null;
         let comprobanteDataUrl = null;
 
-        // ===== RENDERIZAR PRODUCTOS =====
+        // Configuración de la tienda
+        const CONFIG = {
+            whatsappNumber: '71270717',
+            countryCode: '591',
+            bank: 'BCP',
+            account: '201-51999874-3-05',
+            beneficiary: 'Doris Isabel Arteaga Velasquez',
+            concept: 'Juguetes',
+            expiry: '09/07/2027',
+            adminUser: 'DORIS',
+            adminPassword: 'DORIS123',
+            maxImageSize: 1048487 // 1MB en bytes
+        };
+
+        // ═══════════════════════════════════════════════════════════════
+        // 🔥 ESCUCHAR PRODUCTOS EN TIEMPO REAL (FIREBASE)
+        // ═══════════════════════════════════════════════════════════════
+
+        function escucharProductos() {
+            db.collection("productos")
+                .orderBy("createdAt", "desc")
+                .onSnapshot((snapshot) => {
+                    products = [];
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        products.push({
+                            id: doc.id,
+                            name: data.name || 'Producto',
+                            price: data.price || 0,
+                            category: data.category || 'Sin categoría',
+                            image: data.image || 'https://picsum.photos/seed/' + doc.id + '/400/400',
+                            createdAt: data.createdAt || Date.now()
+                        });
+                    });
+
+                    filteredProducts = [...products];
+                    currentPage = 1;
+                    renderProducts();
+                    console.log('🔄 Productos actualizados desde Firebase:', products.length);
+                }, (error) => {
+                    console.error('❌ Error al escuchar productos:', error);
+                    showToast('❌ Error al cargar productos desde Firebase', 'error');
+                });
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // FUNCIONES DE FIREBASE - CORREGIDAS CON VALIDACIÓN
+        // ═══════════════════════════════════════════════════════════════
+
+        async function agregarProductoFirebase(product) {
+            try {
+                // Verificar autenticación
+                const user = auth.currentUser;
+                if (!user) {
+                    showToast('❌ Debes iniciar sesión como admin', 'error');
+                    console.error('❌ No hay usuario autenticado');
+                    return null;
+                }
+                
+                console.log('✅ Usuario autenticado:', user.email);
+                console.log('📦 Intentando guardar:', product);
+                
+                // Verificar tamaño de la imagen (si es base64)
+                if (product.image && product.image.startsWith('data:image')) {
+                    const sizeInBytes = product.image.length;
+                    if (sizeInBytes > CONFIG.maxImageSize) {
+                        showToast('❌ La imagen es demasiado grande (máx 1MB)', 'error');
+                        console.error('❌ Imagen demasiado grande:', sizeInBytes, 'bytes');
+                        return null;
+                    }
+                }
+                
+                const docRef = await db.collection("productos").add({
+                    name: product.name,
+                    price: parseFloat(product.price),
+                    category: product.category,
+                    image: product.image || 'https://picsum.photos/seed/' + Date.now() + '/400/400',
+                    createdAt: Date.now()
+                });
+                
+                console.log('✅ Producto agregado con ID:', docRef.id);
+                showToast('✅ Producto agregado a la tienda', 'success');
+                return docRef.id;
+            } catch (error) {
+                console.error('❌ Error detallado:', error);
+                console.error('❌ Código de error:', error.code);
+                console.error('❌ Mensaje:', error.message);
+                
+                if (error.code === 'permission-denied') {
+                    showToast('❌ Error de permisos. Verifica las reglas de Firestore.', 'error');
+                } else if (error.code === 'unauthenticated') {
+                    showToast('❌ No estás autenticado. Inicia sesión como admin.', 'error');
+                } else if (error.message.includes('longer than')) {
+                    showToast('❌ La imagen es demasiado grande. Máximo 1MB.', 'error');
+                } else {
+                    showToast('❌ Error: ' + error.message, 'error');
+                }
+                return null;
+            }
+        }
+
+        async function eliminarProductoFirebase(id) {
+            try {
+                const user = auth.currentUser;
+                if (!user) {
+                    showToast('❌ Debes iniciar sesión como admin', 'error');
+                    return false;
+                }
+                
+                await db.collection("productos").doc(id).delete();
+                console.log('🗑️ Producto eliminado:', id);
+                showToast('🗑️ Producto eliminado', 'info');
+                return true;
+            } catch (error) {
+                console.error('❌ Error al eliminar producto:', error);
+                showToast('❌ Error al eliminar producto', 'error');
+                return false;
+            }
+        }
+
+        async function comprarProductoFirebase(id) {
+            try {
+                await db.collection("productos").doc(id).delete();
+                console.log('🛒 Producto comprado y eliminado:', id);
+                showToast('🎉 ¡Compra realizada con éxito!', 'success');
+                return true;
+            } catch (error) {
+                console.error('❌ Error al comprar producto:', error);
+                showToast('❌ Error al procesar la compra', 'error');
+                return false;
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        // RENDERIZAR PRODUCTOS
+        // ═══════════════════════════════════════════════════════════════
+
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const pageProducts = filteredProducts.slice(start, end);
 
-            if (pageProducts.length === 0) {
-                grid.innerHTML = '<div class="empty-products">No hay productos en esta categoría</div>';
+            if (filteredProducts.length === 0) {
+                grid.innerHTML = '<div class="empty-products">No hay productos disponibles</div>';
                 document.getElementById('productCount').textContent = '0 productos';
+                updatePagination();
                 return;
             }
 
             grid.innerHTML = pageProducts.map(product => `
-                <div class="product-card" data-id="${product.id}">
-                    <img src="${product.image}" alt="${product.name}" loading="lazy" />
-                    <div class="product-body">
-                        <div class="product-category">${product.category}</div>
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-price">Bs. ${product.price.toFixed(2)}</div>
-                        <div class="product-actions">
-                            <button class="btn-buy" data-id="${product.id}"><i class="fas fa-shopping-cart"></i> Comprar</button>
-                            ${isAdmin ? `<button class="btn-delete" data-id="${product.id}"><i class="fas fa-trash"></i></button>` : ''}
+                    <div class="product-card" data-id="${product.id}">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy" 
+                             onerror="this.src='https://picsum.photos/seed/${product.id}/400/400'" />
+                        <div class="product-body">
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-price">Bs. ${product.price.toFixed(2)}</div>
+                            <div class="product-actions">
+                                <button class="btn-buy" data-id="${product.id}">
+                                    <i class="fas fa-shopping-cart"></i> Comprar
+                                </button>
+                                ${isAdmin ? `<button class="btn-delete" data-id="${product.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>` : ''}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
 
             document.getElementById('productCount').textContent = `${filteredProducts.length} productos`;
             updatePagination();
 
+            // Eventos de compra
             document.querySelectorAll('.btn-buy').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    const id = parseInt(this.dataset.id);
+                    const id = this.dataset.id;
                     const product = filteredProducts.find(p => p.id === id);
                     if (product) {
                         openPurchaseModal(product);
@@ -1620,23 +1737,24 @@
                 });
             });
 
+            // Eventos de eliminar (solo admin)
             if (isAdmin) {
                 document.querySelectorAll('.btn-delete').forEach(btn => {
                     btn.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        const id = parseInt(this.dataset.id);
+                        const id = this.dataset.id;
                         if (confirm('¿Eliminar este producto?')) {
-                            products = products.filter(p => p.id !== id);
-                            filteredProducts = filteredProducts.filter(p => p.id !== id);
-                            renderProducts();
-                            showToast('🗑️ Producto eliminado', 'info');
+                            eliminarProductoFirebase(id);
                         }
                     });
                 });
             }
         }
 
-        // ===== PAGINACIÓN =====
+        // ═══════════════════════════════════════════════════════════════
+        // PAGINACIÓN
+        // ═══════════════════════════════════════════════════════════════
+
         function updatePagination() {
             const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
             document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages}`;
@@ -1659,7 +1777,10 @@
             }
         });
 
-        // ===== FILTROS =====
+        // ═══════════════════════════════════════════════════════════════
+        // FILTROS
+        // ═══════════════════════════════════════════════════════════════
+
         function applyFilters() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const checkedCategories = document.querySelectorAll('.category-filter:checked');
@@ -1682,7 +1803,7 @@
             } else if (sortValue === 'price-desc') {
                 filteredProducts.sort((a, b) => b.price - a.price);
             } else {
-                filteredProducts.sort((a, b) => a.id - b.id);
+                filteredProducts.sort((a, b) => a.createdAt - b.createdAt);
             }
 
             currentPage = 1;
@@ -1736,7 +1857,7 @@
             });
         });
 
-        // ===== BUSCADOR =====
+        // ----- BUSCADOR -----
         document.getElementById('searchInput').addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 applyFilters();
@@ -1747,7 +1868,10 @@
             applyFilters();
         });
 
-        // ===== MODAL COMPRA =====
+        // ═══════════════════════════════════════════════════════════════
+        // MODAL COMPRA
+        // ═══════════════════════════════════════════════════════════════
+
         function openPurchaseModal(product) {
             currentPurchaseProduct = product;
             currentPurchaseAmount = parseFloat(product.price);
@@ -1756,15 +1880,16 @@
 
             const productInfo = document.getElementById('purchaseProductInfo');
             productInfo.innerHTML = `
-                <div class="purchase-product-card">
-                    <img src="${product.image}" alt="${product.name}" class="purchase-product-img" />
-                    <div class="purchase-product-details">
-                        <h4>${product.name}</h4>
-                        <div class="purchase-product-category">${product.category}</div>
-                        <div class="purchase-product-price">Bs. ${currentPurchaseAmount.toFixed(2)}</div>
+                    <div class="purchase-product-card">
+                        <img src="${product.image}" alt="${product.name}" class="purchase-product-img" 
+                             onerror="this.src='https://picsum.photos/seed/${product.id}/400/400'" />
+                        <div class="purchase-product-details">
+                            <h4>${product.name}</h4>
+                            <div class="purchase-product-category">${product.category}</div>
+                            <div class="purchase-product-price">Bs. ${currentPurchaseAmount.toFixed(2)}</div>
+                        </div>
                     </div>
-                </div>
-            `;
+                `;
 
             comprobanteFile = null;
             comprobanteDataUrl = null;
@@ -1785,7 +1910,10 @@
             }
         });
 
-        // ===== COPIAR CUENTA =====
+        // ═══════════════════════════════════════════════════════════════
+        // COPIAR CUENTA
+        // ═══════════════════════════════════════════════════════════════
+
         document.getElementById('copyAccountBtn2').addEventListener('click', function() {
             const text =
                 `Banco: ${CONFIG.bank}\n` +
@@ -1807,7 +1935,10 @@
             });
         });
 
-        // ===== SUBIR COMPROBANTE =====
+        // ═══════════════════════════════════════════════════════════════
+        // SUBIR COMPROBANTE
+        // ═══════════════════════════════════════════════════════════════
+
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('comprobanteInput');
         const filePreview = document.getElementById('filePreview');
@@ -1846,7 +1977,36 @@
             showToast('🗑️ Comprobante eliminado', 'info');
         });
 
-        // ===== ENVIAR COMPROBANTE POR WHATSAPP =====
+        // ═══════════════════════════════════════════════════════════════
+        // PAGAR POR WHATSAPP
+        // ═══════════════════════════════════════════════════════════════
+
+        document.getElementById('whatsappPayBtn').addEventListener('click', function() {
+            const product = currentPurchaseProduct;
+            if (!product) return;
+
+            const fullNumber = CONFIG.countryCode + CONFIG.whatsappNumber;
+            const message = encodeURIComponent(
+                `🛍️ *NUEVA COMPRA - JRADY TOYS*\n\n` +
+                `📦 *Producto:* ${product.name}\n` +
+                `🏷️ *Categoría:* ${product.category}\n` +
+                `💰 *Monto:* Bs. ${currentPurchaseAmount.toFixed(2)}\n\n` +
+                `💳 *Datos de pago:*\n` +
+                `🏦 Banco: ${CONFIG.bank}\n` +
+                `👤 Titular: ${CONFIG.beneficiary}\n` +
+                `🔢 Cuenta: ${CONFIG.account}\n` +
+                `📅 Vencimiento: ${CONFIG.expiry}\n\n` +
+                `✅ Adjunto el comprobante de pago.`
+            );
+
+            window.open(`https://wa.me/${fullNumber}?text=${message}`, '_blank');
+            showToast('📱 Abriendo WhatsApp para enviar el comprobante', 'success');
+        });
+
+        // ═══════════════════════════════════════════════════════════════
+        // ENVIAR COMPROBANTE POR WHATSAPP
+        // ═══════════════════════════════════════════════════════════════
+
         document.getElementById('sendComprobanteBtn').addEventListener('click', function() {
             const product = currentPurchaseProduct;
             if (!product) {
@@ -1892,69 +2052,49 @@
             showToast('📱 Abriendo WhatsApp... Adjunta la imagen descargada', 'success');
         });
 
-        // ===== PAGAR POR WHATSAPP =====
-        document.getElementById('whatsappPayBtn').addEventListener('click', function() {
-            const product = currentPurchaseProduct;
-            if (!product) return;
+        // ═══════════════════════════════════════════════════════════════
+        // CONFIRMAR PAGO (COMPRA EN FIREBASE)
+        // ═══════════════════════════════════════════════════════════════
 
-            const fullNumber = CONFIG.countryCode + CONFIG.whatsappNumber;
-            const message = encodeURIComponent(
-                `🛍️ *NUEVA COMPRA - JRADY TOYS*\n\n` +
-                `📦 *Producto:* ${product.name}\n` +
-                `🏷️ *Categoría:* ${product.category}\n` +
-                `💰 *Monto:* Bs. ${currentPurchaseAmount.toFixed(2)}\n\n` +
-                `💳 *Datos de pago:*\n` +
-                `🏦 Banco: ${CONFIG.bank}\n` +
-                `👤 Titular: ${CONFIG.beneficiary}\n` +
-                `🔢 Cuenta: ${CONFIG.account}\n` +
-                `📅 Vencimiento: ${CONFIG.expiry}\n\n` +
-                `✅ Adjunto el comprobante de pago.`
-            );
-
-            window.open(`https://wa.me/${fullNumber}?text=${message}`, '_blank');
-            showToast('📱 Abriendo WhatsApp para enviar el comprobante', 'success');
-        });
-
-        // ===== CONFIRMAR PAGO =====
         document.getElementById('confirmPaymentBtn').addEventListener('click', function() {
             if (!comprobanteFile) {
                 showToast('❌ Sube el comprobante de pago antes de confirmar', 'error');
                 return;
             }
 
+            if (!currentPurchaseProduct) {
+                showToast('❌ No hay producto seleccionado', 'error');
+                return;
+            }
+
             showToast('⏳ Procesando confirmación de pago...', 'info');
 
-            setTimeout(() => {
+            setTimeout(async () => {
                 const success = Math.random() < 0.9;
                 if (success) {
-                    showToast('✅ ¡Pago confirmado! El producto será enviado.', 'success');
-                    completePurchase();
+                    await comprarProductoFirebase(currentPurchaseProduct.id);
+                    document.getElementById('purchaseModal').classList.remove('active');
+                    currentPurchaseProduct = null;
+                    showToast('✅ ¡Pago confirmado! Producto eliminado del inventario.', 'success');
                 } else {
                     showToast('❌ No pudimos confirmar tu pago. Intenta nuevamente.', 'error');
                 }
             }, 1500);
         });
 
-        // ===== COMPLETAR COMPRA =====
-        function completePurchase() {
-            if (!currentPurchaseProduct) return;
+        // ═══════════════════════════════════════════════════════════════
+        // ADMIN - LOGIN (CON FIREBASE AUTHENTICATION)
+        // ═══════════════════════════════════════════════════════════════
 
-            const productId = currentPurchaseProduct.id;
-            products = products.filter(p => p.id !== productId);
-            filteredProducts = filteredProducts.filter(p => p.id !== productId);
-
-            setTimeout(() => {
-                document.getElementById('purchaseModal').classList.remove('active');
-                renderProducts();
-                showToast('🎉 ¡Compra completada con éxito!', 'success');
-                currentPurchaseProduct = null;
-            }, 2000);
-        }
-
-        // ===== ADMIN - LOGIN =====
+        // Botón Admin
         document.getElementById('btnAdminLogin').addEventListener('click', function(e) {
             e.preventDefault();
-            document.getElementById('loginModal').classList.add('active');
+            const user = auth.currentUser;
+            if (user) {
+                showToast('✅ Ya estás logueado como ' + user.email, 'info');
+            } else {
+                document.getElementById('loginModal').classList.add('active');
+            }
         });
 
         document.getElementById('closeModalBtn').addEventListener('click', () => {
@@ -1967,36 +2107,82 @@
             }
         });
 
+        // Login usando Firebase Authentication
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const user = document.getElementById('loginUser').value.trim().toUpperCase();
-            const pass = document.getElementById('loginPassword').value.trim().toUpperCase();
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPassword').value.trim();
 
-            if (user === CONFIG.adminUser && pass === CONFIG.adminPassword) {
-                isAdmin = true;
-                document.getElementById('loginModal').classList.remove('active');
-                document.getElementById('adminSection').classList.remove('hidden');
+            if (!user || !pass) {
+                showToast('❌ Ingresa usuario y contraseña', 'error');
+                return;
+            }
+
+            console.log('🔐 Intentando login con:', user);
+            
+            auth.signInWithEmailAndPassword(user, pass)
+                .then((userCredential) => {
+                    console.log('✅ Login exitoso:', userCredential.user.email);
+                    isAdmin = true;
+                    document.getElementById('loginModal').classList.remove('active');
+                    document.getElementById('adminSection').classList.remove('hidden');
+                    document.getElementById('btnAdminLogin').innerHTML = '<i class="fas fa-user-shield"></i> Admin ✓';
+                    document.getElementById('btnAdminLogin').classList.add('logged');
+                    showToast('✅ Bienvenido Admin - ' + userCredential.user.email, 'success');
+                    renderProducts();
+                })
+                .catch((error) => {
+                    console.error('❌ Error de login:', error);
+                    console.error('❌ Código:', error.code);
+                    console.error('❌ Mensaje:', error.message);
+                    
+                    document.getElementById('loginError').classList.remove('hidden');
+                    document.getElementById('loginError').textContent = '❌ ' + error.message;
+                    setTimeout(() => {
+                        document.getElementById('loginError').classList.add('hidden');
+                    }, 5000);
+                });
+        });
+
+        // ═══════════════════════════════════════════════════════════════
+        // ADMIN - CERRAR SESIÓN
+        // ═══════════════════════════════════════════════════════════════
+
+        document.getElementById('adminLogoutBtn').addEventListener('click', function() {
+            auth.signOut().then(() => {
+                isAdmin = false;
+                document.getElementById('adminSection').classList.add('hidden');
                 document.getElementById('btnAdminLogin').innerHTML = '<i class="fas fa-user-shield"></i> Admin';
-                showToast('✅ Bienvenido Admin', 'success');
+                document.getElementById('btnAdminLogin').classList.remove('logged');
+                showToast('👋 Sesión cerrada', 'info');
+                renderProducts();
+            }).catch((error) => {
+                console.error('❌ Error al cerrar sesión:', error);
+            });
+        });
+
+        // Escuchar cambios en el estado de autenticación
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log('✅ Usuario autenticado:', user.email);
+                isAdmin = true;
+                document.getElementById('adminSection').classList.remove('hidden');
+                document.getElementById('btnAdminLogin').innerHTML = '<i class="fas fa-user-shield"></i> Admin ✓';
+                document.getElementById('btnAdminLogin').classList.add('logged');
                 renderProducts();
             } else {
-                document.getElementById('loginError').classList.remove('hidden');
-                setTimeout(() => {
-                    document.getElementById('loginError').classList.add('hidden');
-                }, 3000);
+                console.log('👤 Usuario no autenticado');
+                isAdmin = false;
+                document.getElementById('adminSection').classList.add('hidden');
+                document.getElementById('btnAdminLogin').innerHTML = '<i class="fas fa-user-shield"></i> Admin';
+                document.getElementById('btnAdminLogin').classList.remove('logged');
             }
         });
 
-        // ===== ADMIN - CERRAR SESIÓN =====
-        document.getElementById('adminLogoutBtn').addEventListener('click', function() {
-            isAdmin = false;
-            document.getElementById('adminSection').classList.add('hidden');
-            document.getElementById('btnAdminLogin').innerHTML = '<i class="fas fa-user-shield"></i> Admin';
-            showToast('👋 Sesión cerrada', 'info');
-            renderProducts();
-        });
+        // ═══════════════════════════════════════════════════════════════
+        // ADMIN - AGREGAR PRODUCTO (Firebase) - VERSIÓN CORREGIDA CON VALIDACIÓN DE IMAGEN
+        // ═══════════════════════════════════════════════════════════════
 
-        // ===== ADMIN - AGREGAR PRODUCTO =====
         document.getElementById('productForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -2004,58 +2190,109 @@
             const price = parseFloat(document.getElementById('prodPrice').value);
             const category = document.getElementById('prodCategorySelect').value;
             const imageInput = document.getElementById('prodImageInput');
+            const adminMsg = document.getElementById('adminMsg');
 
-            if (!name || !price || !category) {
-                document.getElementById('adminMsg').textContent = '❌ Completa todos los campos';
-                document.getElementById('adminMsg').style.color = '#dc2626';
+            // Validaciones
+            if (!name) {
+                adminMsg.textContent = '❌ Ingresa el nombre del producto';
+                adminMsg.className = 'admin-msg error';
+                return;
+            }
+            
+            if (!price || isNaN(price) || price <= 0) {
+                adminMsg.textContent = '❌ Ingresa un precio válido';
+                adminMsg.className = 'admin-msg error';
+                return;
+            }
+            
+            if (!category) {
+                adminMsg.textContent = '❌ Selecciona una categoría';
+                adminMsg.className = 'admin-msg error';
                 return;
             }
 
-            let imageUrl = `https://picsum.photos/seed/${Date.now()}/400/400`;
+            // Verificar autenticación
+            const user = auth.currentUser;
+            if (!user) {
+                adminMsg.textContent = '❌ Debes iniciar sesión como admin';
+                adminMsg.className = 'admin-msg error';
+                showToast('❌ Debes iniciar sesión como admin', 'error');
+                return;
+            }
 
+            adminMsg.textContent = '⏳ Guardando producto...';
+            adminMsg.className = 'admin-msg';
+
+            // Función para guardar el producto
+            const guardarProducto = (url) => {
+                agregarProductoFirebase({
+                    name: name,
+                    price: price,
+                    category: category,
+                    image: url
+                }).then((id) => {
+                    if (id) {
+                        document.getElementById('productForm').reset();
+                        document.getElementById('fileNameDisplay').textContent = 'Ningún archivo seleccionado';
+                        adminMsg.textContent = '✅ Producto agregado correctamente';
+                        adminMsg.className = 'admin-msg';
+                        setTimeout(() => {
+                            adminMsg.textContent = '';
+                        }, 3000);
+                    }
+                });
+            };
+
+            // Verificar si se seleccionó una imagen
             if (imageInput.files && imageInput.files[0]) {
+                const file = imageInput.files[0];
+                
+                // VERIFICAR TAMAÑO DE LA IMAGEN
+                if (file.size > CONFIG.maxImageSize) {
+                    adminMsg.textContent = '❌ La imagen es demasiado grande (máx 1MB). Usa una imagen más pequeña.';
+                    adminMsg.className = 'admin-msg error';
+                    showToast('❌ Imagen demasiado grande. Máximo 1MB.', 'error');
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    imageUrl = e.target.result;
-                    addProduct(name, price, category, imageUrl);
+                    guardarProducto(e.target.result);
                 };
-                reader.readAsDataURL(imageInput.files[0]);
+                reader.onerror = function() {
+                    adminMsg.textContent = '❌ Error al leer la imagen';
+                    adminMsg.className = 'admin-msg error';
+                };
+                reader.readAsDataURL(file);
             } else {
-                addProduct(name, price, category, imageUrl);
+                // Si no hay imagen, usar una URL de picsum
+                const randomSeed = Date.now().toString(36) + Math.random().toString(36).substr(2);
+                const imageUrl = `https://picsum.photos/seed/${randomSeed}/400/400`;
+                guardarProducto(imageUrl);
             }
         });
 
-        function addProduct(name, price, category, image) {
-            const newProduct = {
-                id: productIdCounter++,
-                name: name,
-                price: price,
-                category: category,
-                image: image
-            };
-
-            products.push(newProduct);
-            filteredProducts.push(newProduct);
-            renderProducts();
-
-            document.getElementById('productForm').reset();
-            document.getElementById('fileNameDisplay').textContent = 'Ningún archivo seleccionado';
-            document.getElementById('adminMsg').textContent = '✅ Producto agregado correctamente';
-            document.getElementById('adminMsg').style.color = '#2e7d32';
-
-            setTimeout(() => {
-                document.getElementById('adminMsg').textContent = '';
-            }, 3000);
-
-            showToast('✅ Producto agregado', 'success');
-        }
-
         document.getElementById('prodImageInput').addEventListener('change', function() {
-            const fileName = this.files[0] ? this.files[0].name : 'Ningún archivo seleccionado';
-            document.getElementById('fileNameDisplay').textContent = fileName;
+            const file = this.files[0];
+            if (file) {
+                const fileName = file.name;
+                const fileSize = (file.size / 1024).toFixed(2);
+                document.getElementById('fileNameDisplay').textContent = `${fileName} (${fileSize} KB)`;
+                
+                // Verificar tamaño
+                if (file.size > CONFIG.maxImageSize) {
+                    showToast('⚠️ La imagen excede 1MB, será rechazada', 'error');
+                    document.getElementById('fileNameDisplay').textContent = '❌ Imagen demasiado grande (máx 1MB)';
+                }
+            } else {
+                document.getElementById('fileNameDisplay').textContent = 'Ningún archivo seleccionado';
+            }
         });
 
-        // ===== TOAST =====
+        // ═══════════════════════════════════════════════════════════════
+        // TOAST
+        // ═══════════════════════════════════════════════════════════════
+
         function showToast(message, type = 'info') {
             const oldToasts = document.querySelectorAll('.toast-notification');
             oldToasts.forEach(t => t.remove());
@@ -2072,14 +2309,48 @@
             }, 5000);
         }
 
-        // ===== INICIALIZAR =====
-        renderProducts();
+        // ═══════════════════════════════════════════════════════════════
+        // INICIALIZAR - ESCUCHAR PRODUCTOS EN TIEMPO REAL
+        // ═══════════════════════════════════════════════════════════════
 
-        console.log('🚀 JRADY TOYS - Tienda de Juguetes');
+        console.log('🚀 JRADY TOYS - Con Firebase en tiempo real');
         console.log('📱 WhatsApp:', CONFIG.whatsappNumber);
         console.log('🏦 BCP Cuenta:', CONFIG.account);
-        console.log('👤 Admin:', CONFIG.adminUser);
-        console.log('📦 Productos:', products.length);
+        console.log('🔥 Escuchando productos en tiempo real...');
+        console.log('📸 Tamaño máximo de imagen:', CONFIG.maxImageSize / 1024, 'KB');
+
+        // Iniciar escucha en tiempo real
+        escucharProductos();
+
+        // ═══════════════════════════════════════════════════════════════
+        // FUNCIÓN PARA MIGRAR PRODUCTOS INICIALES (OPCIONAL)
+        // ═══════════════════════════════════════════════════════════════
+        // Ejecutar UNA SOLA VEZ para poblar la base de datos
+        /*
+        async function migrarProductosIniciales() {
+            const productosIniciales = [
+                { name: 'Monopoly Clásico', price: 120, category: 'Juegos de mesa', image: 'https://picsum.photos/seed/monopoly/400/400' },
+                { name: 'Muñeca Barbie Dreamhouse', price: 350, category: 'Niña', image: 'https://picsum.photos/seed/barbie/400/400' },
+                { name: 'Lego City 60200', price: 280, category: 'Lego', image: 'https://picsum.photos/seed/lego/400/400' },
+                { name: 'Pelota de Fútbol', price: 65, category: 'Juegos de exterior', image: 'https://picsum.photos/seed/ball/400/400' },
+                { name: 'Sonajero Bebé', price: 25, category: 'Bebé', image: 'https://picsum.photos/seed/rattle/400/400' },
+                { name: 'Coche RC 4x4', price: 180, category: 'Niño', image: 'https://picsum.photos/seed/rc/400/400' },
+                { name: 'Uno Card Game', price: 45, category: 'Juegos de mesa', image: 'https://picsum.photos/seed/uno/400/400' },
+                { name: 'Casa de Muñecas', price: 420, category: 'Niña', image: 'https://picsum.photos/seed/dollhouse/400/400' },
+                { name: 'Lego Technic', price: 550, category: 'Lego', image: 'https://picsum.photos/seed/technic/400/400' },
+                { name: 'Trompo Metálico', price: 35, category: 'Niño', image: 'https://picsum.photos/seed/trompo/400/400' }
+            ];
+            
+            for (const p of productosIniciales) {
+                await agregarProductoFirebase(p);
+                console.log('✅ Producto agregado:', p.name);
+            }
+            console.log('✅ ¡Todos los productos iniciales migrados a Firebase!');
+        }
+        
+        // DESCOMENTA Y EJECUTA UNA SOLA VEZ EN LA CONSOLA:
+        // migrarProductosIniciales();
+        */
     </script>
 </body>
 </html>
